@@ -31,3 +31,5 @@ Or get the app from the [Releases Section](https://github.com/flipperdevices/Fli
 - `components/core` - Core library with deps and utils
 - `components/bridge` - Communication between android and Flipper
 - `components/*` - Features modules, which connect to root application
+test
+
