@@ -17,7 +17,13 @@ project("mfkey32")
 
 file(GLOB_RECURSE SOURCE_FILES
         "nfc-tools/mfkey32v2/crapto1/*.h"
-        "nfc-tools/mfkey32v2/crapto1/*.c")
+        "nfc-tools/mfkey32v2/crapto1/*.c"
+        "nfc-tools/mfkey32v2/mfkey32.c"
+        "nfc-tools/mfkey32v2/mfkey32.h"
+        "nfc-tools/mfkey32v2/parity.c"
+        "nfc-tools/mfkey32v2/parity.h"
+        "nfc-tools/mfkey32v2/util.c"
+        "nfc-tools/mfkey32v2/util.h")
 
 add_library( # Sets the name of the library.
         mfkey32
