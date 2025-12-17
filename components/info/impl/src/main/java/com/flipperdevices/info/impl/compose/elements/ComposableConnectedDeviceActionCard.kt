@@ -18,6 +18,7 @@ fun ComposableConnectedDeviceActionCard(
     requestSynchronize: () -> Unit,
     alarmOnFlipper: () -> Unit,
     hasAlarm: Boolean,
+    onExportData: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     if (deviceStatus is DeviceStatus.NoDevice) {
@@ -39,7 +40,8 @@ fun ComposableConnectedDeviceActionCard(
         )
         ComposableInfoDivider()
         ComposableExportData(
-            enabled = enabled
+            enabled = enabled,
+            onExportData = onExportData
         )
     }
 }
@@ -97,6 +99,7 @@ private fun ComposableAlarmElement(
 @Composable
 private fun ComposableExportData(
     enabled: Boolean,
+    onExportData: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val color = if (enabled) {
@@ -110,6 +113,10 @@ private fun ComposableExportData(
         titleId = R.string.info_device_export_data,
         iconId = DesignSystem.drawable.ic_upload,
         color = color,
-        onClick = null
+        onClick = if (enabled) {
+            onExportData
+        } else {
+            null
+        }
     )
 }

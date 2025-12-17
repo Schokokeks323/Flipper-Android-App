@@ -35,6 +35,7 @@ dependencies {
     implementation(projects.components.bottombar.api)
     implementation(projects.components.rootscreen.api)
     implementation(projects.components.analytics.metric.api)
+    implementation(projects.components.filemngr.download.api)
 
     implementation(projects.components.bridge.synchronization.api)
     implementation(projects.components.bridge.connection.service.api)
@@ -45,6 +46,7 @@ dependencies {
     implementation(projects.components.bridge.connection.feature.provider.api)
     implementation(projects.components.bridge.connection.feature.getinfo.api)
     implementation(projects.components.bridge.connection.feature.storageinfo.api)
+    implementation(projects.components.bridge.connection.feature.storage.api)
     implementation(projects.components.bridge.connection.feature.alarm.api)
     implementation(projects.components.bridge.connection.feature.deviceColor.api)
     implementation(projects.components.bridge.connection.feature.protocolversion.api)

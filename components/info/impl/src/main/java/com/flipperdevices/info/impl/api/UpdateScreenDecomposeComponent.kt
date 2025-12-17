@@ -12,6 +12,8 @@ import com.flipperdevices.bottombar.handlers.ResetTabDecomposeHandler
 import com.flipperdevices.core.preference.pb.HardwareColor
 import com.flipperdevices.core.ui.lifecycle.viewModelWithFactory
 import com.flipperdevices.deeplink.model.Deeplink
+import com.flipperdevices.filemanager.download.api.DownloadDecomposeComponent
+import com.flipperdevices.filemanager.download.model.DownloadableFile
 import com.flipperdevices.info.impl.compose.screens.ComposableDeviceInfoScreen
 import com.flipperdevices.info.impl.model.DeviceScreenNavigationConfig
 import com.flipperdevices.info.impl.viewmodel.AlarmViewModel
@@ -31,6 +33,7 @@ import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.update
+import okio.Path.Companion.toPath
 import javax.inject.Provider
 
 @Suppress("LongParameterList")
@@ -45,9 +48,13 @@ class UpdateScreenDecomposeComponent @AssistedInject constructor(
     private val firmwareUpdateViewModelProvider: Provider<FirmwareUpdateViewModel>,
     private val alarmViewModelProvider: Provider<AlarmViewModel>,
     private val basicInfoViewModelProvider: Provider<BasicInfoViewModel>,
-    private val metricApi: MetricApi
+    private val metricApi: MetricApi,
+    private val downloadDecomposeComponentFactory: DownloadDecomposeComponent.Factory
 ) : ScreenDecomposeComponent(componentContext), ResetTabDecomposeHandler {
     private val requestScrollToTopFlow = MutableStateFlow(false)
+    private val downloadDecomposeComponent by lazy {
+        downloadDecomposeComponentFactory(componentContext)
+    }
 
     @Suppress("NonSkippableComposable", "LongMethod")
     @Composable
@@ -97,6 +104,14 @@ class UpdateScreenDecomposeComponent @AssistedInject constructor(
             onStartUpdateRequest = {
                 rootNavigation.push(RootScreenConfig.UpdateScreen(it))
             },
+            onExportData = {
+                downloadDecomposeComponent.download(
+                    DownloadableFile(
+                        fullPath = "/ext/subghz/1.sub".toPath(),
+                        size = 0L
+                    )
+                )
+            },
             deeplink = deeplink,
             deviceStatus = deviceStatus,
             connectViewModel = connectViewModel,
@@ -113,6 +128,8 @@ class UpdateScreenDecomposeComponent @AssistedInject constructor(
                 rootNavigation.push(RootScreenConfig.ScreenStreaming)
             }
         )
+
+        downloadDecomposeComponent.Render()
     }
 
     override fun onResetTab() {

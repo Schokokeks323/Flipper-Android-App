@@ -53,6 +53,7 @@ fun ComposableDeviceInfoScreen(
     alarmOnFlipper: () -> Unit,
     onOpenRemoteControl: () -> Unit,
     onStartUpdateRequest: (UpdateRequest) -> Unit,
+    onExportData: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     var refreshRequested: Boolean by remember { mutableStateOf(false) }
@@ -109,7 +110,8 @@ fun ComposableDeviceInfoScreen(
                 supportedState = supportedState,
                 requestSynchronize = connectViewModel::requestSynchronize,
                 alarmOnFlipper = alarmOnFlipper,
-                hasAlarm = hasAlarm
+                hasAlarm = hasAlarm,
+                onExportData = onExportData
             )
             ComposablePairDeviceActionCard(
                 modifier = Modifier.padding(top = 14.dp, bottom = 14.dp),
