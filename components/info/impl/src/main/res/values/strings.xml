@@ -37,6 +37,7 @@
     <string name="info_device_info_int_flash">Int. Flash (Used/Total)</string>
     <string name="info_device_info_ext_flash">SD Card (Used/Total)</string>
     <string name="info_device_info_more_information">Full Info</string>
+    <string name="info_device_export_data">Export Data</string>
 
     <string name="info_device_screen_streaming_title">Remote Control</string>
     <string name="info_device_screen_streaming_desc">Control your Flipper Zero remotely via mobile phone</string>

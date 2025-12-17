@@ -1,7 +1,6 @@
 package com.flipperdevices.info.impl.compose.elements
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import com.flipperdevices.bridge.connection.feature.protocolversion.model.FlipperSupportedState
 import com.flipperdevices.core.ui.theme.LocalPallet
@@ -37,6 +36,10 @@ fun ComposableConnectedDeviceActionCard(
         ComposableAlarmElement(
             enabled = hasAlarm && enabled,
             alarmOnFlipper = alarmOnFlipper
+        )
+        ComposableInfoDivider()
+        ComposableExportData(
+            enabled = enabled
         )
     }
 }
@@ -88,5 +91,25 @@ private fun ComposableAlarmElement(
         } else {
             null
         }
+    )
+}
+
+@Composable
+private fun ComposableExportData(
+    enabled: Boolean,
+    modifier: Modifier = Modifier
+) {
+    val color = if (enabled) {
+        LocalPallet.current.accentSecond
+    } else {
+        LocalPallet.current.text16
+    }
+
+    ButtonElementRow(
+        modifier = modifier,
+        titleId = R.string.info_device_export_data,
+        iconId = DesignSystem.drawable.ic_upload,
+        color = color,
+        onClick = null
     )
 }
